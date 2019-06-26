@@ -3,9 +3,11 @@ import {View, Text} from 'react-native'
 
 class FindPlace extends React.Component{
     render(){
-        <View>
-            <Text>This is FindPlace</Text>
-        </View>
+        return(
+            <View>
+                <Text>This is FindPlace</Text>
+            </View>
+        )
     }
 }
 
