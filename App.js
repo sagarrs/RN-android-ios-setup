@@ -77,15 +77,30 @@
 
 
 import {Navigation} from 'react-native-navigation'
+import {Provider} from 'react-redux'
+import configureStore from './src/redux/store/configureStore'
+import {addPlace} from './src/redux/actions/places'
 
 import AuthScreen from './src/screens/Auth/Auth'
 import SharePlace from './src/screens/SharePlace/SharePlace'
 import FindPlace from './src/screens/SharePlace/FindPlace'
 
+const store = configureStore()
+
+store.subscribe(() => {
+  console.log(store.getState())
+})
+
+const place = {
+  key: 1, palce: "blore",
+}
+
+store.dispatch(addPlace(place))
+
 // Registering a screen
-Navigation.registerComponent("awesome-places.AuthScreen", () => AuthScreen)
-Navigation.registerComponent("awesome-places.SharePlace", () => SharePlace)
-Navigation.registerComponent("awesome-places.FindPlace", () => FindPlace)
+Navigation.registerComponent("awesome-places.AuthScreen", () => AuthScreen, store, Provider)
+Navigation.registerComponent("awesome-places.SharePlace", () => SharePlace, store, Provider)
+Navigation.registerComponent("awesome-places.FindPlace", () => FindPlace, store, Provider)
 
 // start a app
 Navigation.startSingleScreenApp({
